@@ -1,6 +1,8 @@
 <?php
 
+use database\Conexion;
 use lib\BaseController;
+use models\OrmImpl;
 
 class UsuarioController extends BaseController{
 
@@ -14,6 +16,15 @@ class UsuarioController extends BaseController{
         echo "soy de editar información ".$parametro[0];
      
      endif;
+    }
+   /// usuario y roles
+    public function test()
+    {     
+    $sql = "INSERT INTO rol(name_rol) values(?)";
+    echo OrmImpl::optimizeCud($sql,[
+    "Vendedor"    
+    ]);
+    
     }
 }
 

@@ -11,7 +11,12 @@ define("PASSWORD","Rosales");
 /// servidor 
 define("SERVER","localhost");
 
+
 /// La base de datos con lo cuál vas a trabajar
 define("DBNAME","app_permisos");
+
+# Para el Driver
+
+define("DRIVER","mysql:host=".SERVER.";dbname=".DBNAME);
 
 ?>

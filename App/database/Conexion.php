@@ -1,14 +1,12 @@
 <?php
 namespace database;
-require 'config.php'; 
+
+use traits\TConexion;
+
 class Conexion {
-   
-    public function __construct()
-    {
-     echo USUARIO;
-    }
+   use TConexion;
 }
 
-$conexion = new Conexion();
+ 
 
 ?>

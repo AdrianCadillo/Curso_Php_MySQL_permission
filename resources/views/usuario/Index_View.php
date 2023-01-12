@@ -1,3 +1,5 @@
-<h1>TODOS LOS USUARIOS(VISTA USUARIO)</h1>
 
-<input type="text" >
+ <div class="container">
+  <h1>Hola</h1>
+
+ </div>

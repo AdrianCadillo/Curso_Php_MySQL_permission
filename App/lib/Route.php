@@ -48,10 +48,14 @@ $Objeto = new $controlador;
 
 $Methodo = self::getNameMethod();
 
-if(method_exists($Objeto,$Methodo)):
-self::getParams($Objeto,$Methodo);
+if(!empty(self::getNameMethod())):
+   if(method_exists($Objeto,$Methodo)):
+      self::getParams($Objeto,$Methodo);
+      else:
+         echo "metodo no existe";
+   endif;
 else:
-  $Objeto->index();
+   $Objeto->index();
 endif;
 
 /// llamamos al método
