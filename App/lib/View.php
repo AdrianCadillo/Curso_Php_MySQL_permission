@@ -10,6 +10,9 @@ class View {
   private string $Vista_;
 
   private string $Footer;
+
+  private string $Jquery="public/libs/base.php";
+
     public function view_($vista):void{
 
       $this->Dashboard = $this->raiz_View."components/Dashboard.php"; 
@@ -21,15 +24,18 @@ class View {
       $this->Footer = $this->raiz_View."layouts/plantilla_footer.php";
 
       if($this->File_Existe($this->Dashboard,$this->Sidebar,$this->Vista_,
-       $this->Footer)):
+       $this->Footer,$this->Jquery)):
       require_once $this->Dashboard;
 
       require_once $this->Sidebar;
 
+
+      require_once $this->Jquery;
+      
       require_once $this->Vista_;
 
       require_once $this->Footer;
-
+   
       else:
         echo "error";
       endif;
@@ -38,9 +44,10 @@ class View {
     # AVLIDAR LA EXISTENCIA DE LOS ARCHIVOS
 
     private function File_Existe(string $Dashboard_,string $Sidebar_,
-    string $view__,string $footer_):bool{
+    string $view__,string $footer_,string $jquery_):bool{
      return (file_exists($Dashboard_) and file_exists($Sidebar_)
-             and file_exists($view__) and file_exists($footer_));   
+             and file_exists($view__) and file_exists($footer_) 
+             and file_exists($jquery_));   
     }
 }
 

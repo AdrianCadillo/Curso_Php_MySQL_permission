@@ -131,6 +131,119 @@ public static function Update(string $Tabla,array $datos)
     self::CerrarBD();
   }
  }
+
+  # METODO PARA REALIZAR BÚSQUEDAS POR WHEREAND 
+
+  public static function WhereAnd(string $Tabla,array $atributes)
+  {
+   self::$Query = "SELECT *FROM  ".$Tabla." WHERE ";
+ 
+   # realizamos la búsqueda por atributos  
+ 
+   foreach($atributes as $key=>$atributo):
+   self::$Query.="$key=:{$key} AND ";
+   endforeach;
+ 
+   # eliminamos el último AND
+ 
+   self::$Query = trim(self::$Query," AND ");
+ 
+   try {
+     self::$pps = self::getConection()->prepare(self::$Query);
+     foreach($atributes as $key=>$atributo):
+       self::$pps->bindValue(":{$key}",$atributo);
+     endforeach;
+    
+     # ejecutamos la Query
+     self::$pps->execute(); 
+ 
+     return self::$Result = self::$pps->fetchAll(\PDO::FETCH_OBJ);
+ 
+   } catch (\Throwable $th) {
+     echo $th->getMessage();
+   }finally{self::CerrarBD();}
+  }
+ # METODO PARA REALIZAR BÚSQUEDAS POR WHEREOR
+
+ public static function WhereOr(string $Tabla,array $atributes)
+ {
+  self::$Query = "SELECT *FROM  ".$Tabla." WHERE ";
+
+  # realizamos la búsqueda por atributos
+
+  foreach($atributes as $key=>$atributo):
+  self::$Query.="$key=:{$key} OR ";
+  endforeach;
+
+  # eliminamos el último OR
+
+  self::$Query = trim(self::$Query," OR ");
+
+  try {
+    self::$pps = self::getConection()->prepare(self::$Query);
+    foreach($atributes as $key=>$atributo):
+      self::$pps->bindValue(":{$key}",$atributo);
+    endforeach;
+   
+    # ejecutamos la Query
+    self::$pps->execute();
+
+    return self::$Result = self::$pps->fetchAll(\PDO::FETCH_OBJ);
+
+  } catch (\Throwable $th) {
+    echo $th->getMessage();
+  }finally{self::CerrarBD();}
+ }
+
+    # METODO PARA REALIZAR BÚSQUEDAS POR WHEREANDOR
+
+    public static function WhereAndOr($Tabla,array $atributes,string $operador)
+    {
+     self::$Query = "SELECT *FROM  ".$Tabla." WHERE ";
+    
+     # realizamos la búsqueda por atributos
+   
+     foreach($atributes as $key=>$atributo):
+     self::$Query.="$key=:{$key} $operador ";
+     endforeach;
+   
+     # eliminamos el último OPERADOR= OR AND
+   
+     self::$Query = trim(self::$Query," $operador ");
+   
+     try {
+       self::$pps = self::getConection()->prepare(self::$Query);
+
+       foreach($atributes as $key=>$atributo):
+         self::$pps->bindValue(":{$key}",$atributo);
+       endforeach;
+      
+       # ejecutamos la Query
+       self::$pps->execute();
+   
+       return self::$Result = self::$pps->fetchAll(\PDO::FETCH_OBJ);
+   
+     } catch (\Throwable $th) {
+       echo $th->getMessage();
+     }finally{self::CerrarBD();}
+    }
+ # METODO PARA REALIZAR UNA BÚSQUEDA SIN CONDICIÓN
+
+  public static function get($Tabla)
+  {
+    self::$Query = "SELECT *FROM ".$Tabla;
+
+    try {
+      self::$pps = self::getConection()->prepare(self::$Query);
+
+      self::$pps->execute();
+
+      return self::$Result = self::$pps->fetchAll(\PDO::FETCH_OBJ);
+
+    } catch (\Throwable $th) {
+      echo $th->getMessage();
+    }finally{self::CerrarBD();}
+  }
 }
 
 
