@@ -244,6 +244,23 @@ public static function Update(string $Tabla,array $datos)
       echo $th->getMessage();
     }finally{self::CerrarBD();}
   }
+  
+  public static function getBayId(string $Query,$Id){
+    try {
+      self::$pps = self::getConection()->prepare($Query);
+
+      self::$pps->bindParam(1,$Id);
+
+      self::$pps->execute();
+
+      return self::$Result = self::$pps->fetchAll(\PDO::FETCH_OBJ);
+
+    } catch (\Throwable $th) {
+      echo $th->getMessage();
+    }finally{
+      self::cerrarBD();
+    }
+  }
 }
 
 

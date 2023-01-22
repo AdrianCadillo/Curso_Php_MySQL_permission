@@ -34,6 +34,10 @@ public static function Update(string $Tabla,array $datos);
 
   public static function get($Tabla);
 
+  # METODO PARA MOSTRAR DATOS POR ID
+
+  public static function getBayId(string $Query,$Id);
+
 
 
 }
