@@ -261,6 +261,26 @@ public static function Update(string $Tabla,array $datos)
       self::cerrarBD();
     }
   }
+
+  # metodo para eliminar usuarios
+  public static function delete(string $Tabla,$atributo,$value){
+
+    self::$Query = "DELETE FROM ".$Tabla." WHERE {$atributo} = :{$atributo}"; 
+
+    try {
+      self::$pps = self::getConection()->prepare(self::$Query);
+
+      self::$pps->bindValue(":{$atributo}",$value);
+
+      return self::$pps->execute();
+
+    } catch (\Throwable $th) {
+     echo $th->getMessage();
+    }finally{
+      self::cerrarBD();
+    }
+  }
+  
 }
 
 

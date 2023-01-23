@@ -23,5 +23,11 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
 
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css">
+ 
+  <link rel="stylesheet" href="<?php echo URL; ?>public/node_modules/sweetalert2/dist/sweetalert2.css">
+
+   
+  <link rel="stylesheet" href="<?php echo URL; ?>public/node_modules/sweetalert2/dist/sweetalert2.min.css">
+
 </head>
 <body>

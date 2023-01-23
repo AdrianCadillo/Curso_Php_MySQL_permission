@@ -33,5 +33,7 @@ public function getRolesUsuario($id_user){
 
  return OrmImpl::getBayId($Query,$id_user);
 }
+
+ 
 }
 ?>

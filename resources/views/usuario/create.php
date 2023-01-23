@@ -24,7 +24,7 @@
                     <div class="col-xl-4 col-lg-4 col-12">
                         <div class="form-group">
                             <label for="pasword"><b>Password (*) </b></label>
-                            <input type="pasword" name="pasword" id="pasword" class="form-control" placeholder="Ingresa tu Password..." autocomplete="pasword" required>
+                            <input type="password" name="pasword" id="pasword" class="form-control" placeholder="Ingresa tu Password..." autocomplete="pasword" required>
                         </div>
                     </div>
 
@@ -43,7 +43,7 @@
                     <?php
                     foreach ($this->roles_ as $role) :
                     ?>
-                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-12">
+                        <div class="col-xl-3 col-lg-2 col-md-3 col-sm-6 col-12">
                             <label for="<?php echo $role->id_role; ?>">
                                 <?php echo $role->name_rol; ?>
                             </label>
@@ -58,38 +58,7 @@
                         <i class="fas fa-save"></i>
                     </button>
                 </div>
-
-                <div class="text-center py-2">
-                    <?php
-                    if ($this->getSession("mensaje")) :
-
-                        if ($this->getValueSession("mensaje") === 'existe') :
-                    ?>
-
-                            <div class="alert alert-warning">
-                                <b>Ya existe este usuario</b>
-                            </div>
-                        <?php endif; ?>
-
-                        <?php
-                        if ($this->getValueSession("mensaje") === '2') :
-                        ?>
-                            <div class="alert alert-danger">
-                                <b>Error, por lo menos seleccione un rol</b>
-                            </div>
-                        <?php endif; ?>
-
-                        <?php
-                        if ($this->getValueSession("mensaje") === '1') :
-                        ?>
-                            <div class="alert alert-success">
-                                <b>Usuario registrado</b>
-                            </div>
-                        <?php endif; ?>
-
-                    <?php unset($_SESSION['mensaje']);
-                    endif; ?>
-                </div>
+ 
             </form>
         </div>
     </div>

@@ -38,6 +38,10 @@ public static function Update(string $Tabla,array $datos);
 
   public static function getBayId(string $Query,$Id);
 
+  # METODO PARA ELIMINAR DATOS
+
+  public static function delete(string $Tabla,$atributo,$value);
+
 
 
 }
