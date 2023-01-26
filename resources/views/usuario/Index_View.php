@@ -38,7 +38,7 @@
 
 
    <?php unset($_SESSION['mensaje_update']); endif; ?>  
-    <div class="table-responsive">
+    <div class="table-responsive-sm">
             <table class="table responsive table-striped nowrap" id="table_roles"
             style="width: 100%;">
                 <thead>

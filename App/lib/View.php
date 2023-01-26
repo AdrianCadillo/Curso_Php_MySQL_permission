@@ -1,7 +1,8 @@
 <?php 
 namespace lib;
-class View {
+class View extends Authenticate{
   private string $raiz_View = "resources/views/";
+  
 
   private string $Dashboard;
 
@@ -53,6 +54,21 @@ class View {
              and file_exists($view__) and file_exists($footer_) 
              and file_exists($jquery_) and file_exists($DataTable_));   
     }
+
+   # METODO PARA MOSTRAR LA VISTA SIN EL DASHBOARD
+   public function render($vista)
+   {
+     $Views=$this->raiz_View.$vista.".php";
+
+     $ErrorPage = $this->raiz_View."error/404.php";
+
+     if(file_exists($Views)):
+     require_once $Views;
+
+     else:
+      require_once $ErrorPage;
+     endif;
+   } 
 }
 
 ?>

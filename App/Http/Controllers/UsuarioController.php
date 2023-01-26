@@ -26,6 +26,8 @@ class UsuarioController extends BaseController{
 
     public $Roles_No_Asignados;
 
+   
+
     public function __construct()
     {
 
@@ -42,13 +44,19 @@ class UsuarioController extends BaseController{
 
     public function index()
     {
-         $this->Usuarios = Usuario::get("usuario");
+        # valida la url para no acceder al sistema sin antes de estar logueado
+        $this->Auth($this->getRedirectLogin());
+
+        $this->Usuarios = Usuario::get("usuario");
         $this->view_("usuario/Index_View.php");
    
     }
 
     public function create()
     {
+
+         # valida la url para no acceder al sistema sin antes de estar logueado
+         $this->Auth($this->getRedirectLogin());
 
         $this->roles_ = OrmImpl::get("rol");
 
@@ -61,6 +69,9 @@ class UsuarioController extends BaseController{
 
     public function save()
     {
+         # valida la url para no acceder al sistema sin antes de estar logueado
+         $this->Auth($this->getRedirectLogin());
+
         if ($this->getValidateFoto() > 0) :
             /// proceso de registro 
             $Imagen = $this->Foto['tmp_name'];
@@ -80,7 +91,7 @@ class UsuarioController extends BaseController{
 
     /**REGISTRAR UN USUARIO */
 
-    public function SaveUsuario($NameFoto_)
+    protected function SaveUsuario($NameFoto_)
     {
                 // registro de usuarios
       $_SESSION['mensajes'] = Usuario::Create([
@@ -122,8 +133,11 @@ class UsuarioController extends BaseController{
         return $this->Foto['size'];
     }
 
-    public function editar($dato)
+    public function editar($dato=null)
     {
+    
+         # valida la url para no acceder al sistema sin antes de estar logueado
+         $this->Auth($this->getRedirectLogin());
     
     /// consulta procedimiento almacenado para mostrar los roles asignados del usuario
     $Query_Roles_Asignados = "call proc_roles_asignados(?);";
@@ -159,6 +173,9 @@ class UsuarioController extends BaseController{
   /**MODIFICAR LOS DATOS DEL USUARIO */
 
    public function modify($data){
+
+     # valida la url para no acceder al sistema sin antes de estar logueado
+     $this->Auth($this->getRedirectLogin());
    
    /// modificar los datos del usuario
    $_SESSION['mensaje_update'] = Usuario::Modificar([
@@ -189,7 +206,11 @@ class UsuarioController extends BaseController{
 
  # METODO PARA ELIMINAR USUARIO
  
- public function delete($data){
+ public function delete($data=null){
+
+  # valida la url para no acceder al sistema sin antes de estar logueado
+  $this->Auth($this->getRedirectLogin());
+
   if(isset($_POST['accion'])):
    if($_POST['accion'] === 'delete'):
 

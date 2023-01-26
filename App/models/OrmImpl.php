@@ -280,7 +280,29 @@ public static function Update(string $Tabla,array $datos)
       self::cerrarBD();
     }
   }
-  
+
+   /**
+       * Buscador con varios parametros
+       */
+      public static function Search_Data($Query, $datos = [])
+      {
+          try {
+              self::$pps = self::getConection()
+              ->prepare($Query);
+
+              for($i=0;$i<count($datos);$i++):
+                self::$pps->bindParam(($i+1),$datos[$i]);
+              endfor;
+
+              self::$pps->execute();
+
+              return self::$pps->fetchAll(\PDO::FETCH_OBJ);
+          } catch (\Throwable $th) {
+              echo "ERROR AL CONSULTAR DATOS";
+          }finally{
+              self::cerrarBD();
+          }
+      } 
 }
 
 

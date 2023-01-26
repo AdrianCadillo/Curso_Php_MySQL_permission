@@ -1,5 +1,8 @@
 <?php 
 namespace lib;
+
+use Http\error\Error;
+
 class Route {
 
 /// atributos
@@ -52,7 +55,9 @@ if(!empty(self::getNameMethod())):
    if(method_exists($Objeto,$Methodo)):
       self::getParams($Objeto,$Methodo);
       else:
-         echo "metodo no existe";
+         $error = new Error;
+
+         $error->error404();
    endif;
 else:
    $Objeto->index();

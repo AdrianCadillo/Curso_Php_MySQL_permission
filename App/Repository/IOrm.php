@@ -42,6 +42,11 @@ public static function Update(string $Tabla,array $datos);
 
   public static function delete(string $Tabla,$atributo,$value);
 
+      /**
+       * Buscador con varios parametros
+       */
+   public static function Search_Data($Query, $datos = []);
+
 
 
 }

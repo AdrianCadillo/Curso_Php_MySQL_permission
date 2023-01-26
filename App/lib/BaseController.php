@@ -8,6 +8,7 @@ class BaseController extends View{
 /*
 METODO PARA REDIRECCIONAR PÁGINAS
 */
+private string $redirectLogin = "/login";
 
 public static function Redirect($ruta_)
 {
@@ -33,6 +34,13 @@ public function getRolesUsuario($id_user){
 
  return OrmImpl::getBayId($Query,$id_user);
 }
+
+public function getRedirectLogin()
+{
+    return $this->redirectLogin;
+}
+
+
 
  
 }

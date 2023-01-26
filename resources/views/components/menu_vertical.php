@@ -186,6 +186,14 @@
               
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/usuario">
+              <i class="fas fa-upload menu-icon"></i>
+              <span class="menu-title">Importar datos</span>
+              
+            </a>
+          </li>
  
         </ul>
       </nav>
