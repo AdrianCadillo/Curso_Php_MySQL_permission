@@ -16,16 +16,19 @@
   <link rel="stylesheet" href="<?php echo URL; ?>public/libs/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo URL; ?>public/libs/images/favicon.png" />
+
+  <link rel="stylesheet" href="<?php echo URL; ?>public/libs/css/mi_stilo.css">
+
 </head>
 
 <body>
   <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
+    <div class="container-fluid page-body-wrapper full-page-wrapper ">
+      <div class="content-wrapper d-flex align-items-center auth px-0 ">
         <div class="row w-100 mx-0">
-          <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
+          <div class="col-xl-4 col-lg-5 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5 card_">
+              <div class="brand-logo ">
                 <img src="<?php echo URL; ?>public/libs/images/logo-dark.svg" alt="logo">
               </div>
               <h4>Bienveido al sistema</h4>
@@ -33,7 +36,7 @@
               <form class="pt-3" action="/login/login"method="POST">
 
                <div class="form-group">
-                  <select name="rol" id="rol" class="form-control">
+                  <select name="rol" id="rol" class="form-control" autofocus autocomplete="rol" required>
                    <option disabled selected> --- Seleccione su perfíl --- </option> 
                    <?php if(isset($this->Roles)): ?>
                      <?php foreach($this->Roles as $role): ?>
@@ -44,15 +47,15 @@
                 </div>
 
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username"
-                  name="email">
+                  <input type="email" class="form-control form-control-lg input_" id="exampleInputEmail1" placeholder="Username"
+                  name="email" required autocomplete="email">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password"
-                  name="password">
+                  <input type="password" class="form-control form-control-lg input_ " id="exampleInputPassword1" placeholder="Password"
+                  name="password" required autocomplete="email">
                 </div>
-                <div class="mt-3">
-                  <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"  >SIGN IN</button>
+                <div class="mt-3 text-center">
+                  <button class="btn-lg-primary"  >SIGN IN</button>
                 </div>
               </form>
  

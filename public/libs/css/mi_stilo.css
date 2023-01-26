@@ -1,0 +1,34 @@
+.btn-lg-primary {
+	box-shadow:inset -1px -1px 1px 0px #bbdaf7;
+	background:linear-gradient(to bottom, #79bbff 5%, #1e7ad6 100%);
+	background-color:#79bbff;
+	border-radius:13px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 110px;
+	text-decoration:none;
+	text-shadow:0px 0px 50px #1782ed;
+}
+.btn-lg-primary:hover {
+	background:linear-gradient(to bottom, #1e7ad6 5%, #79bbff 100%);
+	background-color:#1e7ad6;
+}
+.btn-lg-primary:active {
+	position:relative;
+	top:1px;
+}
+
+.input_ { border-color:#cccccc; border-style:solid; padding:11px; font-size:23px; border-radius:23px; border-width:5px; text-shadow:-33px 38px 30px rgba(42,42,42,.100);  }
+.input_:focus { outline:none; } 
+
+.card_{
+	box-shadow:
+    5px 5px 10px black,
+    10px 10px 10px rgb(184, 206, 210),
+    20px 20px 10px rgb(0, 242, 255),
+    10px 10px 10px rgb(0,0,0, 0.5) inset;	
+}

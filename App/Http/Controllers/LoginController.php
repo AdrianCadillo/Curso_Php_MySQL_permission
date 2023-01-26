@@ -23,7 +23,9 @@ private string $redirectPageAdmin = "/usuario";
 public function __construct()
 {
 
-    session_start();
+   session_start();
+   
+     
 
     $this->Username = $_POST['email']??'';
 
@@ -117,6 +119,8 @@ protected function getProfile()
 
   return Usuario::Search_Data($Consulta,[$this->Username,$this->Rol]);
 }
+
+ 
 
 
 

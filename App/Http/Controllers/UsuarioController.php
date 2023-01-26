@@ -31,7 +31,7 @@ class UsuarioController extends BaseController{
     public function __construct()
     {
 
-        session_start();
+         session_start();
 
         $this->Foto = $_FILES['foto'] ?? '';
 
