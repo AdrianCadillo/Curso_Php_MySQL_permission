@@ -188,9 +188,9 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/usuario">
+            <a class="nav-link" href="/modulo/import">
               <i class="fas fa-upload menu-icon"></i>
-              <span class="menu-title">Importar datos</span>
+              <span class="menu-title">Módulo</span>
               
             </a>
           </li>

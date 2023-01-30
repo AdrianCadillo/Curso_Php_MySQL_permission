@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>PolluxUI Admin</title>
+  <title>Login</title>
   <!-- base:css -->
   <link rel="stylesheet" href="<?php echo URL; ?>public/libs/vendors/typicons/typicons.css">
   <link rel="stylesheet" href="<?php echo URL; ?>public/libs/vendors/css/vendor.bundle.base.css">
@@ -31,7 +31,7 @@
               <div class="brand-logo ">
                 <img src="<?php echo URL; ?>public/libs/images/logo-dark.svg" alt="logo">
               </div>
-              <h4>Bienveido al sistema</h4>
+              <h4>Bienvenido al sistema</h4>
               <h6 class="font-weight-light">Ingrese sus credenciales</h6>
               <form class="pt-3" action="/login/login"method="POST">
 

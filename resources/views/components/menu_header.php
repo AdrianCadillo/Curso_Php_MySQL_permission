@@ -12,7 +12,7 @@
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="<?php echo URL; ?>public/libs/images/faces/face5.jpg" alt="profile"/>
+              <img src="<?php echo URL.$this->getFoto(); ?>" alt="profile"/>
               <span class="nav-profile-name">
                <?php if($this->getSession("username")) ?>
                <?php echo $this->getValueSession("username") ?>  

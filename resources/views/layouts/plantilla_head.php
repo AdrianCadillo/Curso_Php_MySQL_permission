@@ -28,6 +28,6 @@
 
    
   <link rel="stylesheet" href="<?php echo URL; ?>public/node_modules/sweetalert2/dist/sweetalert2.min.css">
-
+  <link rel="stylesheet" href="<?php echo URL; ?>public/libs/css/mi_stilo.css">
 </head>
 <body>

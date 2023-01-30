@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="text-center py-2">
-                    <button class="btn btn-info btn-rounded btn-fw" id="upload_"><b><i class="fas fa-upload"></i> Subir Foto</b></button>
+                    <button class="button_new" id="upload_"><b><i class="fas fa-upload"></i> Subir Foto</b></button>
                     <input type="file" name="foto" class="d-none" id="foto">
                 </div>
 
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="text-center py-3">
-                    <button class="btn btn-success btn-rounded btn-fw">Guardar usuario
+                    <button class="btn_save">Guardar usuario
                         <i class="fas fa-save"></i>
                     </button>
                 </div>

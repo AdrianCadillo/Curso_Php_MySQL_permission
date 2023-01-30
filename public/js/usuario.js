@@ -15,7 +15,16 @@ function LeerImagen(Input, IdIamgen) {
 
 /// metodo para confirmar antes de eliminar un usuario
 
-function ConfirmDelete(id,Name){
+function ConfirmDelete(id,Name,IDUSUARIO){
+
+
+ if(id == IDUSUARIO){
+    Swal.fire({
+    title:"¡AVISO DEL SISTEMA!",
+    text:'Error, Usted no puede eliminar su cuenta',
+    icon:'error'    
+    })
+ }else{
     Swal.fire({
         title: 'Desea eliminar al usuario '+Name+" ?",
         text: "Al eliminar al usuario, se eliminará sus roles asignados",
@@ -29,6 +38,7 @@ function ConfirmDelete(id,Name){
            eliminar(id)
         }
       })
+ }
 }
 
 /// metodo para eliminar al usuario
