@@ -53,13 +53,11 @@
                     <td>
                      <div class="row">
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-12 m-1">
-                        <a href="" class="btn btn-warning btn-rounded btn-fw btn-sm"><i class="fas fa-pencil"></i></a>    
+                        <button class="btn btn-warning btn-rounded btn-fw btn-sm" onclick="$('#modal_modulo_editar').modal('show'); editar(`<?php echo $module->id_modulo?>`,`<?php echo $module->name_modulo?>`,`<?php echo $module->key_modulo?>`);"><i class="fas fa-pencil"></i></button>    
                         </div>
                         
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-12 m-1">
-                        <form action="" method="post">
-                          <button class="btn btn-danger btn-rounded btn-fw btn-sm"><i class="fas fa-trash-alt"></i></button>  
-                        </form>
+                          <button class="btn btn-danger btn-rounded btn-fw btn-sm" onclick="ConfirmDelete(`<?php echo $module->id_modulo?>`,`<?php echo $module->name_modulo?>`)"><i class="fas fa-trash-alt"></i></button>  
                         </div>
                      </div>    
                     </td>
@@ -89,10 +87,45 @@
     </div>
     </div>
 </div>
+<!-------- MODAL PARA EDITAR MODULOS ----------->
 
+<div class="modal fade" id="modal_modulo_editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+       <span class="float-start"><h6>Editar módulos</h6></span>
+
+       <span class="float-end"><button class="btn btn-danger btn-rounded btn-fw" id="salir_modulo">
+        <i class="fas fa-window-close"></i>
+       </button></span>
+      </div>
+    <div class="modal-body">
+      <div class="form-group">
+       <label for="name_modulo"><b>Nombre Módulo (*)</b></label>
+       <input type="text" id="name_modulo" class="form-control" placeholder="Nombre módulo"> 
+      </div>
+
+      <div class="form-group">
+       <label for="key_modulo"><b>Key Módulo (*)</b></label>
+       <input type="text" id="key_modulo" class="form-control" placeholder="Key módulo"> 
+      </div>
+    
+      <div class="text-center py-1">
+        <button  class="btn_save" id="update_modulo"><b><i class="fas fa-save"></i> Guardar</b></button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
 <script src="<?php echo URL; ?>public/js/control.js"></script>
 
 <script>
+var Base_Url_ ='<?php echo URL;?>';  
+var NombreModulo = $('#name_modulo');
+
+var KeyModulo = $('#key_modulo');
+
+var IdModulo;
 $(document).ready(function(){
 
 var TableModulo = $('#table_modulos').DataTable({
@@ -113,5 +146,116 @@ language:lenguajeDataTableSpanish()
     } 
        
  });
+
+$('#salir_modulo').click(()=>{
+  $('#modal_modulo_editar').modal('hide')
 });
+
+$('#update_modulo').click(function(){
+if(NombreModulo.val().trim().length == 0){
+  NombreModulo.focus()
+}else{
+if(KeyModulo.val().trim().length === 0){
+  KeyModulo.focus()
+}else{
+  update(IdModulo);
+}
+}
+});
+
+});
+
+
+/// editar
+function editar(id,name_modulo,KeyModulo_)
+{
+ IdModulo = id; NombreModulo.val(name_modulo);
+
+ KeyModulo.val(KeyModulo_)
+}
+
+// metodo para modificar los módulos
+
+function update(id){
+$.ajax({
+url:Base_Url_+"modulo/update/"+id,
+method:"POST",
+data:{accion:'update',nm:NombreModulo.val(),km:KeyModulo.val()},
+success:function(response)
+{
+ if(response == 1){
+  Swal.fire({
+  "title":"Mensaje del sistema",
+  "text":"Modulo modificado",
+  "icon":"success"  
+  }).then(function(){
+  location.href= '/modulo/import';  
+  });
+ }else{
+  Swal.fire({
+  "title":"Mensaje del sistema",
+  "text":"Error al modificar Modulo",
+  "icon":"error"  
+  });
+ }
+}
+});  
+}
+// confirmar antes de eliminar
+
+function ConfirmDelete(Id,NameModulo_)
+{
+  
+  Swal.fire({
+        title: 'Desea eliminar al módulo '+NameModulo_+" ?",
+        text: "Al eliminar este módulo, no se podrá recuperar la información",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Eliminar(Id)
+        }
+  })
+}
+
+/// eliminar módulos
+
+function Eliminar(Id)
+{
+$.ajax({
+url:Base_Url_+"modulo/delete/"+Id,
+method:"POST",
+data:{accion:'delete'},
+success:function(response)
+{
+ if(response == 1){
+  Swal.fire({
+  "title":"Mensaje del sistema",
+  "text":"Modulo eliminado",
+  "icon":"success"  
+  }).then(function(){
+  location.href= '/modulo/import';  
+  });
+ }else{
+  if(response == 2 ){
+    Swal.fire({
+  "title":"Mensaje del sistema",
+  "text":"Error al eliminar Modulo",
+  "icon":"error"  
+  });
+  }else{
+  Swal.fire({
+  "title":"Mensaje del sistema",
+  "text":"Error al eliminar Modulo",
+  "icon":"error"  
+  });
+  }
+ }
+}
+}); 
+}
+
 </script>

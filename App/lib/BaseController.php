@@ -1,6 +1,7 @@
 <?php
 namespace lib;
 
+use models\Modulo;
 use models\OrmImpl;
 
 class BaseController extends View{
@@ -10,23 +11,12 @@ METODO PARA REDIRECCIONAR PÁGINAS
 */
 private string $redirectLogin = "/login";
  
-
+ 
 public static function Redirect($ruta_)
 {
  header("Location:{$ruta_}");
 }
 
-/*METODO PARA VERIFICAR LA EXISTENCIA DE UNA SESSION */
-
-public function getSession($Name):bool{
-    return isset($_SESSION[$Name]);
-}
-
-/*METODO PARA RETORNAR EL VALOR DE LA VARIABLE DE SESSION */
-
-public function getValueSession($Name):string{
-    return isset($_SESSION[$Name])?$_SESSION[$Name]:'';
-}
 
 public function getRolesUsuario($id_user){
 
@@ -87,6 +77,14 @@ public function importExcel($Excel)
  public function AsignValueSession($Name_Session,$Value_Session):void{
    $_SESSION[$Name_Session] = $Value_Session; 
  }
+
+ # MOSTRAR LOS MODULOS EN EL SIDEBAR
+
+ public function showModules(){
+  return Modulo::all();
+ }
+
+
 
 }
 ?>

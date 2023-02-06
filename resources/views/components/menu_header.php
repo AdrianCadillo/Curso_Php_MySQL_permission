@@ -24,10 +24,12 @@
                 <?php if($this->getSession("perfil")) ?>
                 <?php echo $this->getValueSession("perfil") ?>
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout_form').submit()">
                 <i class="typcn typcn-eject text-primary"></i>
                 Logout
               </a>
+
+              <form action="/login/logout" method="post" id="logout_form"></form>
             </div>
           </li>
           <li class="nav-item nav-user-status dropdown">

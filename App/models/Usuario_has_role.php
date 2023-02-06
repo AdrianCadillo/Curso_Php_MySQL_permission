@@ -18,6 +18,8 @@ public static function delete_($Id){
     return self::delete(self::$Table,self::$Fillable[0],$Id);
 }
 
+
+
 }
 
 ?>

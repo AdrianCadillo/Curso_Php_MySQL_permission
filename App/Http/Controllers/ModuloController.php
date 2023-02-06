@@ -8,11 +8,20 @@ class ModuloController extends BaseController {
 private $Excel_Archivo;
 
 public array $modulos;
+
+private string $NombreModulo;
+
+private string $KeyModulo;
+
 public function __construct()
 {
   session_start();
 
   $this->Excel_Archivo = $_FILES['excel_module']??'';
+
+  $this->NombreModulo = $_POST['nm'] ?? '';
+
+  $this->KeyModulo = $_POST['km'] ?? '';
 }  
 
 /*======================= 
@@ -69,6 +78,8 @@ public function import_data()
 
 public function export_txt()
 {
+    # valida la url para no acceder al sistema sin antes de estar logueado
+ $this->Auth($this->getRedirectLogin()); 
   $item = 0;
    # creamos el nombre del archivo
 
@@ -106,6 +117,47 @@ public function export_txt()
   header( "Content-Disposition: attachment; filename=".$Reporte_Name_txt.""); //archivo de salida 
   /************************* FIN PROCESO DE DESCARGA ARCHIVO TXT *********************** */
   unlink($Reporte_Name_txt);
+
+}
+
+# llamamos al metodo proceso modificar
+
+public function update($data= null)
+{
+  # valida la url para no acceder al sistema sin antes de estar logueado
+  $this->Auth($this->getRedirectLogin()); 
+ 
+  if(isset($_POST['accion'])):
+  if($_POST['accion'] === 'update'):
+    $this->modify($data[0]);
+  endif;
+  endif;
+
+}
+
+# proceso para modificar
+
+private function modify($Id)
+{
+ echo Modulo::modify([
+  "id_modulo"=>$Id,
+  "name_modulo"=>$this->NombreModulo,
+  "key_modulo"=>$this->KeyModulo  
+  ]);
+}
+
+# eliminar módulos
+
+public function delete($data = null)
+{
+    # valida la url para no acceder al sistema sin antes de estar logueado
+    $this->Auth($this->getRedirectLogin()); 
+ 
+    if(isset($_POST['accion'])):
+     if($_POST['accion'] === 'delete'):
+      echo Modulo::destroy($data[0]);
+     endif;
+    endif;
 
 }
 

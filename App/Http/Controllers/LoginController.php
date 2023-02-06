@@ -120,7 +120,20 @@ protected function getProfile()
   return Usuario::Search_Data($Consulta,[$this->Username,$this->Rol]);
 }
 
+ # metodo para cerra session
+
+ public function logout(){
  
+   $this->Auth($this->getRedirectLogin());
+
+   # cerramos el metodo
+
+   $this->logout_();
+
+   # rediririal login
+
+   $this->Redirect($this->getRedirectLogin());
+ }
 
 
 

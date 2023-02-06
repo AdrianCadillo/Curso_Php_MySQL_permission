@@ -170,30 +170,57 @@
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+     
         <ul class="nav">
-          <li class="nav-item">
+        <?php if(count($this->showModules())>0): ?>
+
+          <?php foreach($this->showModules() as $module): ?>
+
+          <?php if($module->key_modulo === 'dashboard'): ?>
+            <li class="nav-item">
             <a class="nav-link" href="index.html">
               <i class="typcn typcn-device-desktop menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title"><?php echo $module->name_modulo; ?></span>
               
             </a>
           </li>
+          <?php endif; ?>
+          
+          <?php if($module->key_modulo === 'usuarios'): ?>
 
           <li class="nav-item">
             <a class="nav-link" href="/usuario">
               <i class="fas fa-users menu-icon"></i>
-              <span class="menu-title">Usuarios</span>
+              <span class="menu-title"><?php echo $module->name_modulo; ?></span>
               
             </a>
           </li>
 
+          <?php endif; ?>
+          <?php if($module->key_modulo === 'modulo'): ?>
           <li class="nav-item">
             <a class="nav-link" href="/modulo/import">
               <i class="fas fa-upload menu-icon"></i>
-              <span class="menu-title">Módulo</span>
+              <span class="menu-title"><?php echo $module->name_modulo; ?></span>
               
             </a>
           </li>
+          <?php endif; ?>
+
+          <?php if($module->key_modulo === 'roles'): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="/role">
+              <i class="fas fa-user menu-icon"></i>
+              <span class="menu-title"><?php echo $module->name_modulo; ?></span>
+              
+            </a>
+          </li>
+
+          <?php endif; ?>
+
+          <?php endforeach; ?>
+          <?php endif; ?>
  
         </ul>
       </nav>
