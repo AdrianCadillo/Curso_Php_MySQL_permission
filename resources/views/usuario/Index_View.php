@@ -1,9 +1,11 @@
 <div class="container">
    <div class="card">
     <div class="card-header">
-     <span class="float-start">
+    <?php if($this->Autorize("Usuario.create")): ?>
+    <span class="float-start">
      <button class="button_new" onclick="location.href='/usuario/create'"><b> + Nuevo</b></button>   
      </span>
+    <?php endif; ?>    
 
      <span class="float-end">Listado de usuarios</span>
     </div>
@@ -75,17 +77,23 @@
 
                                 <td>
                                  <div class="row">
-                                   <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-12 m-2">
+                                  <?php if($this->Autorize("Usuario.editar")): ?>
+                                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-12 m-2">
                                     <a href="/usuario/editar/<?php echo $user->id_usuario; ?>" class="btn btn-warning btn-rounded btn-fw btn-sm">
                                      <i class="fas fa-pencil"></i>   
                                     </a>
                                    </div>
+                                   <?php endif; ?>  
+
+                                   <?php if($this->Autorize("Usuario.delete")): ?>
                                    
                                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-12 m-2">
                                     <button class="btn btn-danger btn-rounded btn-fw btn-sm"
                                      onclick="ConfirmDelete(`<?php echo $user->id_usuario;?>`,`<?php echo $user->username;?>`,`<?php echo $this->getValueSession('id_usuario')?>`)">
                                     <i class="fas fa-trash-alt"></i></button>
                                    </div>
+
+                                   <?php endif; ?>
                                  </div>   
                                 </td>
                             </tr>

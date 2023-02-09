@@ -177,16 +177,23 @@
 
           <?php foreach($this->showModules() as $module): ?>
 
+          <?php if($this->can("Dashboard")): ?>
+
           <?php if($module->key_modulo === 'dashboard'): ?>
-            <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="typcn typcn-device-desktop menu-icon"></i>
+          <li class="nav-item">
+            <a class="nav-link" href="/home">
+              <i class="fas fa-home  menu-icon"></i>
               <span class="menu-title"><?php echo $module->name_modulo; ?></span>
               
             </a>
           </li>
+
           <?php endif; ?>
-          
+
+          <?php endif; ?>
+
+          <?php if($this->can("Usuario")): ?>
+
           <?php if($module->key_modulo === 'usuarios'): ?>
 
           <li class="nav-item">
@@ -197,7 +204,10 @@
             </a>
           </li>
 
-          <?php endif; ?>
+          <?php endif;endif; ?>
+
+          <?php if($this->can("Modulo")): ?>
+
           <?php if($module->key_modulo === 'modulo'): ?>
           <li class="nav-item">
             <a class="nav-link" href="/modulo/import">
@@ -206,7 +216,9 @@
               
             </a>
           </li>
-          <?php endif; ?>
+          <?php endif; endif;?>
+
+          <?php if($this->can("Rol")): ?>
 
           <?php if($module->key_modulo === 'roles'): ?>
           <li class="nav-item">
@@ -217,11 +229,24 @@
             </a>
           </li>
 
-          <?php endif; ?>
+          <?php endif;endif; ?>
+
+          <?php if($this->can("configuracion")): ?>
+
+          <?php if($module->key_modulo === 'configuracion'): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="/configuracion/basedatos">
+              <i class="fas fa-gear  menu-icon"></i>
+              <span class="menu-title"><?php echo $module->name_modulo; ?></span>
+              
+            </a>
+          </li>
+
+          <?php endif; endif;?>
 
           <?php endforeach; ?>
           <?php endif; ?>
- 
+        
         </ul>
       </nav>
       <!-- partial -->

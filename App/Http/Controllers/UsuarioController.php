@@ -44,11 +44,18 @@ class UsuarioController extends BaseController{
 
     public function index()
     {
+
         # valida la url para no acceder al sistema sin antes de estar logueado
         $this->Auth($this->getRedirectLogin());
 
+        if($this->Autorize("Usuario.{$this->getPermission()[0]}")):
+
         $this->Usuarios = Usuario::get("usuario");
         $this->view_("usuario/Index_View.php");
+
+        else:
+            $this->view_("error/errorViewnoAutorized.php");
+        endif;
    
     }
 
@@ -56,11 +63,19 @@ class UsuarioController extends BaseController{
     {
 
          # valida la url para no acceder al sistema sin antes de estar logueado
-         $this->Auth($this->getRedirectLogin());
+        $this->Auth($this->getRedirectLogin());
+
+        if($this->Autorize("Usuario.{$this->getPermission()[1]}")):
 
         $this->roles_ = OrmImpl::get("rol");
 
         $this->view_("usuario/create.php");
+
+        else:
+
+            $this->view_("error/errorViewnoAutorized.php");
+
+        endif;
     }
 
     /**
@@ -137,7 +152,9 @@ class UsuarioController extends BaseController{
     {
     
          # valida la url para no acceder al sistema sin antes de estar logueado
-         $this->Auth($this->getRedirectLogin());
+    $this->Auth($this->getRedirectLogin());
+
+    if($this->Autorize("Usuario.{$this->getPermission()[2]}")):
     
     /// consulta procedimiento almacenado para mostrar los roles asignados del usuario
     $Query_Roles_Asignados = "call proc_roles_asignados(?);";
@@ -149,8 +166,10 @@ class UsuarioController extends BaseController{
     // enviar los datos de edicion
 
      
-
+    if(count(Usuario::Search_("usuario","id_usuario",$dato[0]))>0):
     $this->Usuarios = Usuario::Search_("usuario","id_usuario",$dato[0]);
+
+
 
     /// mostrar todos los roles que existen
 
@@ -166,6 +185,14 @@ class UsuarioController extends BaseController{
     /// llamamos a la vista editar usuarios
 
     $this->view_("usuario/EditarUsuarioView.php");
+    else:
+        $this->Redirect("/usuario");
+    
+    endif;
+else:
+    $this->view_("error/errorViewnoAutorized.php");
+    endif;
+
     }
     /// usuario y roles
     public function test(){}
@@ -208,8 +235,12 @@ class UsuarioController extends BaseController{
  
  public function delete($data=null){
 
+    
+
   # valida la url para no acceder al sistema sin antes de estar logueado
   $this->Auth($this->getRedirectLogin());
+
+  if($this->Autorize("Usuario.{$this->getPermission()[3]}")):
 
   if(isset($_POST['accion'])):
    if($_POST['accion'] === 'delete'):
@@ -223,6 +254,9 @@ class UsuarioController extends BaseController{
    echo Usuario::eliminar($data[0]);
    endif;
   endif;
+else:
+    $this->view_("error/errorViewnoAutorized.php");
+endif;
  }
  
 }

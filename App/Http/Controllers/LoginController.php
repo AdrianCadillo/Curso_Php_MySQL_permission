@@ -18,7 +18,7 @@ private $Password;
 
 private $Rol;
 
-private string $redirectPageAdmin = "/usuario";
+private string $redirectPageAdmin = "/home";
 
 public function __construct()
 {
@@ -79,9 +79,11 @@ public function login()
 
         $_SESSION['foto'] = $this->getProfile()[0]->foto; # obtenemos la foto usuario
 
+        $_SESSION['id_perfil'] = $this->getProfile()[0]->id_role; # obtenemos la foto usuario
+
         # mostramos la vista principal del Admin Dashboard
 
-        $this->Redirect("/usuario");
+        $this->Redirect($this->redirectPageAdmin);
         
      else:
         echo "CREDENCIALES INCORRECTAS";

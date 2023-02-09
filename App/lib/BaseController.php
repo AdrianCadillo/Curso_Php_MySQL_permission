@@ -3,6 +3,7 @@ namespace lib;
 
 use models\Modulo;
 use models\OrmImpl;
+use models\Rol;
 
 class BaseController extends View{
 
@@ -11,7 +12,8 @@ METODO PARA REDIRECCIONAR PÁGINAS
 */
 private string $redirectLogin = "/login";
  
- 
+private array $Permissions = ['index','create','editar','delete'];
+
 public static function Redirect($ruta_)
 {
  header("Location:{$ruta_}");
@@ -84,7 +86,45 @@ public function importExcel($Excel)
   return Modulo::all();
  }
 
+  /**
+   * METODO PARA JUNTAR TEXTO QUE TIENEN ESPACIO
+   *  */    
+  function juntarTexto($cadena){
+    $texto="";
+    $longitud=strlen($cadena);/// la longitud de la cadena
+    $i=0;
+    while($i<$longitud){
+    if(substr($cadena,$i,1)==' '){
+    $texto.="_";
+    }else{
+    $texto.=substr($cadena,$i,1);
+    }
+    $i++;
+    }
+    return $texto;
+    }
 
+# metodo que autoriza los permisos a los usuarios
+
+public function Autorize(string $permiso):bool
+{
+ return Rol::Autorize($this->getValueSession("id_perfil"),$permiso);
+}
+
+# metodo can
+public function can($Name_Modulo):bool{
+  return ($this->Autorize("{$Name_Modulo}.{$this->Permissions[0]}") or 
+  ($this->Autorize("{$Name_Modulo}.{$this->Permissions[0]}") and $this->Autorize("{$Name_Modulo}.{$this->Permissions[1]}")) or 
+  ($this->Autorize("{$Name_Modulo}.{$this->Permissions[0]}") and $this->Autorize("{$Name_Modulo}.{$this->Permissions[2]}") ) 
+  or ($this->Autorize("{$Name_Modulo}.{$this->Permissions[0]}")  and $this->Autorize("{$Name_Modulo}.{$this->Permissions[3]}") ) );
+}
+
+# retornamos los permisos
+
+public function getPermission()
+{
+return $this->Permissions;
+}
 
 }
 ?>

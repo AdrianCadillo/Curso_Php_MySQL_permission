@@ -35,8 +35,13 @@ public function __construct()
 public function index()
 {
  # mostrar la vista de index
+ if($this->Autorize("Rol.{$this->getPermission()[0]}")):
 
  $this->view_("Role/IndexView.php");
+ 
+ else:
+    $this->view_("error/errorViewnoAutorized.php");
+ endif;
 }
 
 # mostrar la vista de crear  roles

@@ -88,6 +88,15 @@ endif;
 public static function AsingPermission(array $datos){
 return self::Insert_("rol_has_permission",$datos);
 }
+
+# metodo de autorización
+
+public static function Autorize(int $id_rol,string $permiso):bool
+{
+ self::$Query = "call proc_autorize(?,?);";
+
+ return count(self::Search_Data(self::$Query,[$id_rol,$permiso]))>0?true:false;
+}
 }
 
 ?>
