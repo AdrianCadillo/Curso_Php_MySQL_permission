@@ -33,7 +33,15 @@
               </div>
               <h4>Bienvenido al sistema</h4>
               <h6 class="font-weight-light">Ingrese sus credenciales</h6>
-              <form class="pt-3" action="/login/login"method="POST">
+
+              <?php if($this->getSession("mensaje")): ?>
+                    <?php if($this->getValueSession("mensaje") === 'error'): ?>
+                          <div class="alert alert-danger">
+                            Error en las credenciales
+                          </div>
+                      <?php endif; ?>
+              <?php unset($_SESSION['mensaje']);endif; ?>  
+              <form  action="login/login"method="POST">
 
                <div class="form-group">
                   <select name="rol" id="rol" class="form-control" autofocus autocomplete="rol" required>
@@ -48,7 +56,8 @@
 
                 <div class="form-group">
                   <input type="email" class="form-control form-control-lg input_" id="exampleInputEmail1" placeholder="Username"
-                  name="email" required autocomplete="email">
+                  name="email" required autocomplete="email"
+                   value="<?php $this->old("email"); ?>">
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg input_ " id="exampleInputPassword1" placeholder="Password"

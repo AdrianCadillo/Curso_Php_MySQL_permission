@@ -51,49 +51,54 @@ public function login()
 {
      # avlidamos la url 
      $this->Guest($this->redirectPageAdmin);
-     
-     if(count($this->Attemp())>0):
-     # ID DEL USUARIO
 
-     $Id_Usuario = $this->Attemp()[0]->id_usuario;
-
-     # proceso de login de la tabla usuario_has_role
-
-     $Login = Rol::WhereAnd("usuario_has_role",[
-     "id_usuario"=>$Id_Usuario,
-     "id_role"=>$this->Rol,
-     "estado"=>'1'
-     ]);
-
-     if(count($Login)>0):
-
-        # crear variables de sessión 
-
-        $_SESSION['username'] = $this->getProfile()[0]->username; # obtenemos el nombre usuario
-
-        $_SESSION['id_usuario'] = $this->getProfile()[0]->id_usuario; # obtenemos el id usuario
-
-        $_SESSION['email'] = $this->getProfile()[0]->email; # obtenemos el email usuario
-
-        $_SESSION['perfil'] = $this->getProfile()[0]->name_rol; # obtenemos el rol usuario
-
-        $_SESSION['foto'] = $this->getProfile()[0]->foto; # obtenemos la foto usuario
-
-        $_SESSION['id_perfil'] = $this->getProfile()[0]->id_role; # obtenemos la foto usuario
-
-        # mostramos la vista principal del Admin Dashboard
-
-        $this->Redirect($this->redirectPageAdmin);
-        
-     else:
-        echo "CREDENCIALES INCORRECTAS";
-     endif;
-
-    else:
-
-        echo "CREDENCIALES INCORRECTAS";
+     if(isset($_POST['email']) and !empty($_POST['email'])){
+      $this->AsignValueSession("email",$_POST['email']);
+      if(count($this->Attemp())>0):
+         # ID DEL USUARIO
     
-     endif;
+         $Id_Usuario = $this->Attemp()[0]->id_usuario;
+    
+         # proceso de login de la tabla usuario_has_role
+    
+         $Login = Rol::WhereAnd("usuario_has_role",[
+         "id_usuario"=>$Id_Usuario,
+         "id_role"=>$this->Rol,
+         "estado"=>'1'
+         ]);
+    
+         if(count($Login)>0):
+    
+            # crear variables de sessión 
+    
+            $_SESSION['username'] = $this->getProfile()[0]->username; # obtenemos el nombre usuario
+    
+            $_SESSION['id_usuario'] = $this->getProfile()[0]->id_usuario; # obtenemos el id usuario
+    
+            $_SESSION['email'] = $this->getProfile()[0]->email; # obtenemos el email usuario
+    
+            $_SESSION['perfil'] = $this->getProfile()[0]->name_rol; # obtenemos el rol usuario
+    
+            $_SESSION['foto'] = $this->getProfile()[0]->foto; # obtenemos la foto usuario
+    
+            $_SESSION['id_perfil'] = $this->getProfile()[0]->id_role; # obtenemos la foto usuario
+    
+            # mostramos la vista principal del Admin Dashboard
+    
+            $this->Redirect($this->redirectPageAdmin);
+            
+         else:
+           $this->AsignValueSession("mensaje","error");
+         endif;
+    
+        else:
+    
+            $this->AsignValueSession("mensaje","error");
+        
+         endif;
+     } 
+
+     $this->Redirect("/login");
 }
 
 /*===================

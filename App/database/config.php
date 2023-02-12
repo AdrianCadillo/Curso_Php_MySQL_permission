@@ -1,6 +1,6 @@
 <?php 
 /// URL BASE
-define("URL","https://app_permission.com/");
+define("URL","https://5b77-200-48-129-131.sa.ngrok.io/");
 
 /// nombre de usuario de la base de datos
 define("USUARIO","root");

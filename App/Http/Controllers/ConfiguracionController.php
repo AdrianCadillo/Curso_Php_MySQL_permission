@@ -31,9 +31,14 @@ public function __construct()
 public function basedatos()
 {
      
+if($this->Autorize("Config.respaldo") or $this->Autorize("Config.restaurar")):   
 # mostramos la vista 
 
 $this->view_("config/securityView.php");
+
+else:
+    $this->view_("error/errorViewnoAutorized.php");
+endif;
 
 }
 

@@ -231,7 +231,7 @@
 
           <?php endif;endif; ?>
 
-          <?php if($this->can("configuracion")): ?>
+          <?php if($this->Autorize("Config.respaldo") or $this->Autorize("Config.restaurar")): ?>
 
           <?php if($module->key_modulo === 'configuracion'): ?>
           <li class="nav-item">

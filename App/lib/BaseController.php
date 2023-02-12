@@ -126,5 +126,16 @@ public function getPermission()
 return $this->Permissions;
 }
 
+# metodo old
+
+public function old($Name)
+{
+  
+ echo $this->getValueSession($Name);
+
+ unset($_SESSION[$Name]);
+ 
+}
+
 }
 ?>

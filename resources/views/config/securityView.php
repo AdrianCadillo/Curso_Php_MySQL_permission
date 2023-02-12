@@ -1,3 +1,4 @@
+<?php if($this->Autorize("Config.respaldo")):?>
 
 <!---- RESPALDO LA BASE DE DATOS -------->
 <div class="container m-1">
@@ -22,7 +23,10 @@
         </div>
     </div>
 </div>
+
+<?php endif; ?>
  
+<?php if($this->Autorize("Config.restaurar")): ?>
 <!---- RESTAURAR LA BASE DE DATOS -------->
 
 <div class="container m-1">
@@ -64,3 +68,6 @@
         </div>
     </div>
 </div>
+
+ 
+<?php endif;  ?>

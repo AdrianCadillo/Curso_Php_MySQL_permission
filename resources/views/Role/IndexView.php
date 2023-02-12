@@ -22,7 +22,7 @@
                 <?php unset($_SESSION['mensaje']);
                 endif; ?>
 
-            <div class="table-responsive-sm">
+            <div class="table-responsive">
                 <table class="table table-bordered responsive table-striped nowrap" id="Tabla_roles" style="width: 100%;">
                  <thead>
                   <tr>
@@ -162,7 +162,7 @@ let Fila = $(this).parents('tr');
  
  /// redirigir
 
- location.href='/role/editar/'+Datos.id_role+'/'+Datos.name_rol
+ location.href='<?php echo URL; ?>role/editar/'+Datos.id_role+'/'+Datos.name_rol
 });
 }
 </script>
